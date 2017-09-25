@@ -2,7 +2,7 @@
 
 <%= form_tag({controller: 'book', action: :create}, multipart: true) do %>
     <%= file_field_tag 'book' %>
-    <%= submit_tag %>
+    <%= submit_tag 'Upload book' %>
 <% end %>
 
 <p>
