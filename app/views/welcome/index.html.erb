@@ -1,8 +1,12 @@
 <h2>Welcome to Book Converter</h2>
 
 <%= form_tag({controller: 'book', action: :create}, multipart: true) do %>
-    <%= file_field_tag 'book' %>
-    <%= submit_tag 'Upload book' %>
+  <%= file_field_tag 'book' %>
+  <%= submit_tag 'Upload book' %>
+<% end %>
+
+<% if @book_to_show.present? %>
+  <%= link_to "here", "/my_project/data.txt" %>
 <% end %>
 
 <p>
