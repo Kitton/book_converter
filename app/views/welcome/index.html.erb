@@ -1,4 +1,10 @@
 <h2>Welcome to Book Converter</h2>
+
+<%= form_tag({controller: 'book', action: :create}, multipart: true) do %>
+    <%= file_field_tag 'book' %>
+    <%= submit_tag %>
+<% end %>
+
 <p>
   The time is: <%= Time.now %>
 </p>
