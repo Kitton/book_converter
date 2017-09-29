@@ -1,10 +1,13 @@
 class BookController < ApplicationController
   def create
     uploaded_io = params[:book]
-    File.open(Rails.root.join('public', 'upload_books', uploaded_io.original_filename), 'wb') do |file|
+    sanitized_filename = uploaded_io.original_filename.gsub(/[^0-9A-z.\-]/, '_')
+    File.open(Rails.root.join('public', 'upload_books', sanitized_filename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
-    flash[:book_to_show] = uploaded_io.original_filename
+    mobi_sanitized_filename = "#{sanitized_filename}.mobi"
+    exec("ebook-convert #{Rails.root.join('public', 'upload_books', sanitized_filename)} #{Rails.root.join('public', 'upload_books', mobi_sanitized_filename)}")
+    flash[:book_to_show] = mobi_sanitized_filename
     redirect_to controller: :welcome, action: :index
   end
 end
